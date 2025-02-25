@@ -1,0 +1,224 @@
+/* Import a playful font from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+
+/* Global styles (scoped to this component) */
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-family: "Fredoka One", cursive;
+  background-color: #fff8dc; /* Cornsilk - warm background */
+  min-height: 100vh;
+  color: #333;
+}
+
+/* Game title */
+.game-title {
+  font-size: 2.5em;
+  color: #8b4513; /* SaddleBrown */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+/* Cookie section */
+.cookie-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.cookie-image {
+  width: 200px;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.cookie-image:active {
+  transform: scale(1.1); /* Slight enlargement on click */
+}
+
+.cookie-count {
+  font-size: 2em;
+  font-weight: bold;
+  color: #8b4513;
+  margin-top: 10px;
+}
+
+/* Buildings section */
+.buildings-section {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 40px;
+}
+
+.buildings-section h2 {
+  color: #8b4513;
+  font-size: 1.5em;
+}
+
+.buildings-section p {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+
+.building-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 10px 0;
+}
+
+.building-card h3 {
+  margin: 0 0 10px;
+  color: #8b4513;
+}
+
+.building-card p {
+  margin: 5px 0;
+}
+
+/* Upgrades section */
+.upgrades-section {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 40px;
+}
+
+.upgrades-section h2 {
+  color: #8b4513;
+  font-size: 1.5em;
+}
+
+.upgrade-card {
+  background-color: #f0e68c; /* Khaki */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin: 10px 0;
+}
+
+.upgrade-card h3 {
+  margin: 0 0 10px;
+  color: #8b4513;
+}
+
+.upgrade-card p {
+  margin: 5px 0;
+}
+
+/* Achievements section */
+.achievements-section {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 40px;
+}
+
+.achievements-section h2 {
+  color: #8b4513;
+  font-size: 1.5em;
+}
+
+.achievement-card {
+  background-color: #e0ffff; /* LightCyan */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin: 10px 0;
+}
+
+.achievement-card.unlocked {
+  background-color: #7fffd4; /* Aquamarine */
+}
+
+.achievement-card h3 {
+  margin: 0 0 10px;
+  color: #8b4513;
+}
+
+.achievement-card p {
+  margin: 5px 0;
+}
+
+/* Prestige section */
+.prestige-section {
+  width: 100%;
+  max-width: 600px;
+  background-color: #ffd700; /* Gold background for prestige */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.prestige-section h2 {
+  color: #8b4513;
+  font-size: 1.5em;
+}
+
+.prestige-section p {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+.prestige-section button {
+  background-color: #d2691e; /* Chocolate */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Fredoka One", cursive;
+  transition: background-color 0.2s ease;
+}
+
+.prestige-section button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.prestige-section button:hover:not(:disabled) {
+  background-color: #a0522d; /* Sienna - darker on hover */
+}
+
+/* Buttons */
+button {
+  background-color: #d2691e; /* Chocolate */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Fredoka One", cursive;
+  transition: background-color 0.2s ease;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #a0522d; /* Sienna - darker on hover */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .cookie-image {
+    width: 150px;
+  }
+
+  .cookie-count {
+    font-size: 1.5em;
+  }
+
+  .game-title {
+    font-size: 2em;
+  }
+
+  .building-card,
+  .upgrade-card,
+  .achievement-card,
+  .prestige-section {
+    padding: 15px;
+  }
+}
