@@ -1,50 +1,68 @@
 /* Import a playful font from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 
-/* Global styles (scoped to this component) */
+/* Global styles with gradient background */
 .game-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
   font-family: "Fredoka One", cursive;
-  background-color: #fff8dc; /* Cornsilk - warm background */
+  background: linear-gradient(135deg, #fff8dc 0%, #ffdab9 100%);
   min-height: 100vh;
   color: #333;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Game title */
+/* Game title with glow and animation */
 .game-title {
-  font-size: 2.5em;
-  color: #8b4513; /* SaddleBrown */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  margin-bottom: 20px;
+  font-size: 2.8em;
+  color: #8b4513;
+  text-shadow: 0 0 10px rgba(139, 69, 19, 0.7), 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 25px;
+  animation: titlePulse 2s infinite ease-in-out;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.game-title:hover {
+  transform: scale(1.05);
 }
 
 /* Cookie section */
 .cookie-section {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .cookie-image {
   width: 200px;
+  max-width: 100%;
   cursor: pointer;
-  transition: transform 0.1s ease;
+  transition: transform 0.2s ease, filter 0.2s ease; /* Only for hover */
+  animation: cookieSpin 10s linear infinite; /* Continuous spin */
 }
 
-.cookie-image:active {
-  transform: scale(1.1); /* Slight enlargement on click */
+.cookie-image:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 15px #d2691e);
 }
 
 .cookie-count {
-  font-size: 2em;
+  font-size: 2.2em;
   font-weight: bold;
   color: #8b4513;
-  margin-top: 10px;
+  margin-top: 15px;
+  text-shadow: 1px 1px 3px rgba(139, 69, 19, 0.5);
+  transition: color 0.3s ease;
 }
 
-/* Buildings section */
+.cookie-count:hover {
+  color: #a0522d;
+}
+
+/* Buildings section with interactive cards */
 .buildings-section {
   width: 100%;
   max-width: 600px;
@@ -53,20 +71,30 @@
 
 .buildings-section h2 {
   color: #8b4513;
-  font-size: 1.5em;
+  font-size: 1.6em;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .buildings-section p {
-  font-size: 1.2em;
+  font-size: 1.3em;
   margin-bottom: 15px;
+  color: #6b4226;
 }
 
 .building-card {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(45deg, #ffffff 0%, #f5f5f5 100%);
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   padding: 20px;
   margin: 10px 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  cursor: pointer;
+}
+
+.building-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(45deg, #fffacd 0%, #f5f5f5 100%);
 }
 
 .building-card h3 {
@@ -78,7 +106,7 @@
   margin: 5px 0;
 }
 
-/* Upgrades section */
+/* Upgrades section with glowing cards */
 .upgrades-section {
   width: 100%;
   max-width: 600px;
@@ -87,15 +115,38 @@
 
 .upgrades-section h2 {
   color: #8b4513;
-  font-size: 1.5em;
+  font-size: 1.6em;
 }
 
 .upgrade-card {
-  background-color: #f0e68c; /* Khaki */
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(45deg, #f0e68c 0%, #fffacd 100%);
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   padding: 15px;
   margin: 10px 0;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.upgrade-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.5), transparent);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.upgrade-card:hover::before {
+  opacity: 1;
+}
+
+.upgrade-card:hover {
+  transform: scale(1.03);
 }
 
 .upgrade-card h3 {
@@ -107,7 +158,7 @@
   margin: 5px 0;
 }
 
-/* Achievements section */
+/* Achievements section with interactive states */
 .achievements-section {
   width: 100%;
   max-width: 600px;
@@ -116,19 +167,29 @@
 
 .achievements-section h2 {
   color: #8b4513;
-  font-size: 1.5em;
+  font-size: 1.6em;
 }
 
 .achievement-card {
-  background-color: #e0ffff; /* LightCyan */
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(45deg, #e0ffff 0%, #b0e0e6 100%);
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   padding: 15px;
   margin: 10px 0;
+  animation: fadeIn 0.5s ease-in;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.achievement-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .achievement-card.unlocked {
-  background-color: #7fffd4; /* Aquamarine */
+  background: linear-gradient(45deg, #7fffd4 0%, #98f5ff 100%);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 0 15px rgba(127, 255, 212, 0.5);
+  animation: unlockedGlow 1.5s infinite ease-in-out;
 }
 
 .achievement-card h3 {
@@ -140,65 +201,284 @@
   margin: 5px 0;
 }
 
-/* Prestige section */
+/* Prestige section with enhanced interactivity */
 .prestige-section {
   width: 100%;
   max-width: 600px;
-  background-color: #ffd700; /* Gold background for prestige */
+  background: linear-gradient(135deg, #ffd700 0%, #ffec8b 100%);
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
 }
 
 .prestige-section h2 {
   color: #8b4513;
-  font-size: 1.5em;
+  font-size: 1.6em;
 }
 
 .prestige-section p {
-  font-size: 1.2em;
+  font-size: 1.3em;
   margin: 10px 0;
+  color: #6b4226;
 }
 
 .prestige-section button {
-  background-color: #d2691e; /* Chocolate */
+  background: linear-gradient(45deg, #d2691e 0%, #ff8c00 100%);
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 12px 24px;
+  border-radius: 6px;
   cursor: pointer;
   font-family: "Fredoka One", cursive;
-  transition: background-color 0.2s ease;
-}
-
-.prestige-section button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 10px rgba(210, 105, 30, 0.5);
 }
 
 .prestige-section button:hover:not(:disabled) {
-  background-color: #a0522d; /* Sienna - darker on hover */
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(210, 105, 30, 0.7);
 }
 
-/* Buttons */
-button {
-  background-color: #d2691e; /* Chocolate */
+.prestige-section button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Research section with progress bar */
+.research-section {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 40px;
+  background: linear-gradient(135deg, #f0f8ff 0%, #e6e6fa 100%);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.research-section h2 {
+  color: #8b4513;
+  font-size: 1.6em;
+}
+
+.research-progress {
+  background: linear-gradient(45deg, #f0e68c 0%, #fffacd 100%);
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  padding: 15px;
+  margin: 10px 0;
+  position: relative;
+  overflow: hidden;
+  animation: progressPulse 1.5s infinite ease-in-out;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background: rgba(210, 105, 30, 0.5);
+  border-radius: 10px 0 0 10px;
+  transition: width 1s linear;
+}
+
+.research-progress p {
+  margin: 5px 0;
+  font-size: 1.2em;
+  color: #8b4513;
+  position: relative;
+  z-index: 1;
+}
+
+.research-item {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  padding: 15px;
+  margin: 10px 0;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.research-item:hover {
+  transform: translateY(-5px);
+}
+
+.research-item h3 {
+  margin: 0 0 10px;
+  color: #8b4513;
+}
+
+.research-item p {
+  margin: 5px 0;
+  color: #333;
+}
+
+.completed-research {
+  margin-top: 20px;
+}
+
+.completed-research h3 {
+  color: #8b4513;
+  font-size: 1.4em;
+}
+
+.completed-research p {
+  font-size: 1.2em;
+  color: #8b4513;
+}
+
+/* Prestige tree with enhanced interactivity */
+.prestige-tree {
+  margin-top: 20px;
+}
+
+.prestige-tree h3 {
+  color: #8b4513;
+  font-size: 1.4em;
+}
+
+.prestige-upgrade {
+  background: linear-gradient(45deg, #ffffff 0%, #f5f5f5 100%);
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  padding: 15px;
+  margin: 10px 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.prestige-upgrade:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.prestige-upgrade h3 {
+  margin: 0 0 10px;
+  color: #8b4513;
+}
+
+.prestige-upgrade p {
+  margin: 5px 0;
+  color: #333;
+}
+
+.prestige-upgrade button {
+  background: linear-gradient(45deg, #d2691e 0%, #ff8c00 100%);
   color: white;
   border: none;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
   font-family: "Fredoka One", cursive;
-  transition: background-color 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 10px rgba(210, 105, 30, 0.5);
 }
 
-button:disabled {
-  background-color: #ccc;
+.prestige-upgrade button:hover:not(:disabled) {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(210, 105, 30, 0.7);
+}
+
+.prestige-upgrade button:disabled {
+  background: #ccc;
   cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* General buttons */
+button {
+  background: linear-gradient(45deg, #d2691e 0%, #ff8c00 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: "Fredoka One", cursive;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 10px rgba(210, 105, 30, 0.5);
 }
 
 button:hover:not(:disabled) {
-  background-color: #a0522d; /* Sienna - darker on hover */
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(210, 105, 30, 0.7);
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Animations */
+@keyframes titlePulse {
+  0%,
+  100% {
+    text-shadow: 0 0 10px rgba(139, 69, 19, 0.7), 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 15px rgba(139, 69, 19, 1), 2px 2px 6px rgba(0, 0, 0, 0.4);
+  }
+}
+
+@keyframes cookieSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cookieBounce {
+  0% {
+    transform: scale(1) rotate(var(--spin-angle, 0deg));
+  }
+  30% {
+    transform: scale(1.2) rotate(calc(var(--spin-angle, 0deg) + 10deg));
+  } /* Bounce up with rotation */
+  60% {
+    transform: scale(1.1) rotate(calc(var(--spin-angle, 0deg) - 10deg));
+  } /* Bounce back */
+  100% {
+    transform: scale(1) rotate(var(--spin-angle, 0deg));
+  } /* Return to spin position */
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes progressPulse {
+  0%,
+  100% {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  50% {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25),
+      0 0 10px rgba(240, 230, 140, 0.7);
+  }
+}
+
+@keyframes unlockedGlow {
+  0%,
+  100% {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15),
+      0 0 15px rgba(127, 255, 212, 0.5);
+  }
+  50% {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15),
+      0 0 20px rgba(127, 255, 212, 0.8);
+  }
 }
 
 /* Responsive design */
@@ -208,17 +488,23 @@ button:hover:not(:disabled) {
   }
 
   .cookie-count {
-    font-size: 1.5em;
+    font-size: 1.7em;
   }
 
   .game-title {
-    font-size: 2em;
+    font-size: 2.2em;
   }
 
   .building-card,
   .upgrade-card,
   .achievement-card,
-  .prestige-section {
+  .prestige-section,
+  .research-section,
+  .prestige-tree {
     padding: 15px;
+  }
+
+  button {
+    padding: 10px 20px;
   }
 }

@@ -34,6 +34,10 @@
     <div class="research-section">
       <h2>Research</h2>
       <div v-if="currentResearch" class="research-progress">
+        <div
+          class="progress-bar"
+          :style="{ width: researchProgress + '%' }"
+        ></div>
         <p>
           Researching: {{ currentResearch.name }} ({{ researchTimer }}s
           remaining)
@@ -98,8 +102,8 @@ export default {
       totalCookiesEarned: 0,
       cookiesPerClick: 1,
       prestigePoints: 0,
-      buildingProductionMultiplier: 1,
-      buildingCostMultiplier: 1,
+      buildingProductionMultiplier: 1, // Explicitly initialized
+      buildingCostMultiplier: 1, // Explicitly initialized
       buildings: [
         {
           name: "Cursor",
@@ -205,11 +209,13 @@ export default {
   },
   computed: {
     totalProduction() {
-      return this.buildings.reduce(
-        (total, building) =>
-          total + this.getBuildingProduction(building) * building.count,
-        0
-      );
+      return (
+        this.buildings.reduce(
+          (total, building) =>
+            total + this.getBuildingProduction(building) * building.count,
+          0
+        ) || 0
+      ); // Fallback to 0 if undefined
     },
     availableResearches() {
       return this.researches.filter((tech) => !tech.researched);
@@ -217,12 +223,45 @@ export default {
     completedResearches() {
       return this.researches.filter((tech) => tech.researched);
     },
+    researchProgress() {
+      if (!this.currentResearch || this.researchTimer === 0) return 0;
+      return (
+        ((this.currentResearch.time - this.researchTimer) /
+          this.currentResearch.time) *
+        100
+      );
+    },
   },
   methods: {
     clickCookie() {
       const earned = this.cookiesPerClick;
       this.cookies += earned;
       this.totalCookiesEarned += earned;
+
+      const cookieImage = document.querySelector(".cookie-image");
+      if (cookieImage) {
+        const computedStyle = window.getComputedStyle(cookieImage);
+        const transform = computedStyle.getPropertyValue("transform");
+        let angle = 0;
+        if (transform && transform !== "none") {
+          const matrix = transform.match(/matrix\((.+)\)/);
+          if (matrix) {
+            const values = matrix[1].split(", ");
+            const cos = parseFloat(values[0]);
+            const sin = parseFloat(values[1]);
+            angle = Math.round(Math.atan2(sin, cos) * (180 / Math.PI));
+          }
+        }
+
+        cookieImage.classList.remove("bounce");
+        void cookieImage.offsetWidth; // Force reflow
+        cookieImage.style.setProperty("--spin-angle", `${angle}deg`);
+        cookieImage.classList.add("bounce");
+
+        setTimeout(() => {
+          cookieImage.classList.remove("bounce");
+        }, 400);
+      }
     },
     getBuildingCost(building) {
       return Math.floor(
@@ -251,7 +290,6 @@ export default {
         this.cookies = 0;
         this.totalCookiesEarned = 0;
         this.buildings.forEach((building) => (building.count = 0));
-        // Prestige upgrades and researches persist
       }
     },
     canBuyPrestigeUpgrade(upgrade) {
